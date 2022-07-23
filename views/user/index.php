@@ -4,7 +4,7 @@
 </head>
 
 <body>
-<a href="<?=base_url?>index.php?controller=user&action=register">Add New Data</a><br/><br/>
+<a href="<?=base_url?>user/register">Add New Data</a><br/><br/>
 
 	<table width='80%' border=0>
 
@@ -15,15 +15,14 @@
 		<td>Update</td>
 	</tr>
 	<?php 
-    echo "hello world";
 	//while($res = mysql_fetch_array($result)) { // mysql_fetch_array is deprecated, we need to use mysqli_fetch_array 
-	/* while($res = mysqli_fetch_array($result)) { 		
+	while($user = mysqli_fetch_array($users)) { 		
 		echo "<tr>";
-		echo "<td>".$res['name']."</td>";
-		echo "<td>".$res['age']."</td>";
-		echo "<td>".$res['email']."</td>";	
-		echo "<td><a href=\"edit.php?id=$res[id]\">Edit</a> | <a href=\"../Controllers/deleteController.php?id=$res[id]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";		
-	} */
+		echo "<td>".$user['name']."</td>";
+		echo "<td>".$user['age']."</td>";
+		echo "<td>".$user['email']."</td>";	
+    echo "<td><a href='".base_url."user/update&id=".$user['id']."'>Edit</a> | <a href='".base_url."user/delete&id=".$user['id']."' onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";
+	}
 	?>
 	</table>
 </body>

@@ -1,32 +1,34 @@
-<html>
-<head>
-	<title>Add Data</title>
-</head>
+<?php if(isset($edit) && isset($userdata) && is_object($userdata)): // validation whether the form is for create or update?>
+	<h3>Editar Usuario</h3>
+	<?php $url_action = base_url."user/save&id=".$userdata->id; ?>
+<?php else: ?>
+	<h3>Crear nuevo Usuario</h3>
+	<?php $url_action = base_url."user/save"; ?>
+<?php endif; ?>
 
-<body>
-	<a href="<?=base_url?>">Home</a>
+<div>
+  <a href="<?=base_url?>">Home</a>
 	<br/><br/>
 
-	<form action="<?=base_url?>index.php?controller=user&action=save" method="post" name="form1">
+	<form action="<?=$url_action?>" method="POST" name="form1">
 		<table width="25%" border="0">
 			<tr> 
 				<td>Name</td>
-				<td><input type="text" name="name"></td>
+				<td><input type="text" name="name" value="<?=isset($userdata) && is_object($userdata) ? $userdata->name : ''; ?>"></td>
 			</tr>
 			<tr> 
 				<td>Age</td>
-				<td><input type="text" name="age"></td>
+				<td><input type="text" name="age" value="<?=isset($userdata) && is_object($userdata) ? $userdata->age : ''; ?>"></td>
 			</tr>
 			<tr> 
 				<td>Email</td>
-				<td><input type="text" name="email"></td>
+				<td><input type="email" name="email" value="<?=isset($userdata) && is_object($userdata) ? $userdata->email : ''; ?>"></td>
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="Submit" value="Add"></td>
+				<td><input type="submit" name="Submit" value="<?=isset($userdata) && is_object($userdata) ? 'Update' : 'Create'; ?>"></td>
 			</tr>
 		</table>
 	</form>
-</body>
-</html>
+</div>
 
