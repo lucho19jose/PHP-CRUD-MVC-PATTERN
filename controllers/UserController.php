@@ -27,12 +27,13 @@ class UserController{
   }
 
   public function save(){   
-      if(isset($_POST['Submit']) && isset($_POST['name']) && isset($_POST['age']) && isset($_POST['email'])) {	
-
+      if(isset($_POST['Submit']) && isset($_POST['dni']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['birthdate']) && isset($_POST['sex'])) {	
         $user = new User();
+        $user->setDni($_POST['dni']);
         $user->setName($_POST['name']);
-        $user->setAge($_POST['age']);
+        $user->setBirthdate($_POST['birthdate']);
         $user->setEmail($_POST['email']);
+        $user->setSex($_POST['sex']);
 
 				if(isset($_GET['id'])){
           $user->setId($_GET['id']);

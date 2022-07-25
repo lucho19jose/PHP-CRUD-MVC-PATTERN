@@ -3,9 +3,11 @@
 /* include("../config.php"); */
 class User{
 	private $id;
+	private $dni;
 	private $name;
-	private $age;
 	private $email;
+	private $birthdate;
+	private $sex;
 	private $db;
 	
 	public function __construct() {
@@ -16,32 +18,48 @@ class User{
 		return $this->id;
 	}
 
-	function getName() {
-		return $this->name;
+	function getDni() {
+		return $this->dni;
 	}
 	
-  function getAge() {
-		return $this->age;
+	function getName() {
+		return $this->name;
 	}
 
 	function getEmail() {
 		return $this->email;
+	}
+	
+	function getBirthdate() {
+		return $this->birthdate;
+	}
+
+	function getSex() {
+		return $this->sex;
 	}
 
 	function setId($id) {
 		$this->id = $id;
 	}
 
+	function setDni($dni) {
+		$this->dni = $this->db->real_escape_string($dni);
+	}
+
 	function setName($name) {
 		$this->name = $this->db->real_escape_string($name);
 	}
 	
-  function setAge($age) {
-		$this->age = $this->db->real_escape_string($age);
-	}
-	
   function setEmail($email) {
 		$this->email = $this->db->real_escape_string($email);
+	}
+
+	function setBirthdate($birthdate) {
+		$this->birthdate = $this->db->real_escape_string($birthdate);
+	}
+	
+	function setSex($sex) {
+		$this->sex = $this->db->real_escape_string($sex);
 	}
 
 	public function getAll(){
@@ -55,7 +73,7 @@ class User{
 	}
 	
 	public function save(){
-		$sql = "INSERT INTO users VALUES(NULL, '{$this->getName()}', '{$this->getAge()}', '{$this->getEmail()}');";
+		$sql = "INSERT INTO users VALUES(NULL, '{$this->getDni()}','{$this->getName()}', '{$this->getBirthdate()}', '{$this->getEmail()}', '{$this->getSex()}');";
 		$save = $this->db->query($sql);
 		
 		$result = false;
@@ -66,7 +84,7 @@ class User{
 	}
 
   public function update(){
-    $sql = "UPDATE users SET name='{$this->getName()}', age='{$this->getAge()}', email='{$this->getEmail()}' WHERE id={$this->getId()};";
+    $sql = "UPDATE users SET dni='{$this->getDni()}', name='{$this->getName()}', birthdate='{$this->getBirthdate()}', email='{$this->getEmail()}', sex='{$this->getSex()}' WHERE id={$this->getId()};";
     $update = $this->db->query($sql);
     
     $result = false;
